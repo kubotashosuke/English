@@ -51,42 +51,43 @@ const fillinData = [
 ];
 
 // 定義問題データ
+// question: 定義文, answer: 単語, translation: 単語の意味, qTranslation: 定義文の和訳
 const definitionData = [
-    { question: "animals kept on a farm like cows or pigs", answer: "livestock", translation: "家畜" },
-    { question: "the using or eating of something", answer: "consumption", translation: "消費" },
-    { question: "the cutting of trees in a forest", answer: "deforestation", translation: "森林破壊" },
-    { question: "sending out gas or heat into the air", answer: "emissions", translation: "排出" },
-    { question: "completely clean without any bacteria", answer: "sterile", translation: "殺菌された" },
-    { question: "very small living things that sometimes cause disease", answer: "bacteria", translation: "細菌" },
-    { question: "to make something happen faster", answer: "accelerate", translation: "加速させる" },
-    { question: "to be likely to cause harm or damage", answer: "threaten", translation: "脅かす" },
-    { question: "continuing to live after a dangerous situation", answer: "survival", translation: "生存" },
-    { question: "an object in space used to receive and send signals", answer: "satellite", translation: "衛星" },
-    { question: "to sink or go lower", answer: "subside", translation: "沈む" },
-    { question: "a rule or law", answer: "regulation", translation: "規則" },
-    { question: "to take something out", answer: "extract", translation: "抽出する" },
-    { question: "to influence, have an effect on", answer: "affect", translation: "影響を与える" },
-    { question: "staying at the same level", answer: "constant", translation: "一定の" },
-    { question: "an animal such as a crocodile or snake", answer: "reptile", translation: "爬虫類" },
-    { question: "all living things within an environment", answer: "ecosystem", translation: "生態系" },
-    { question: "an animal that eats only plants", answer: "herbivore", translation: "草食動物" },
-    { question: "the process of breaking down food in the stomach", answer: "digestion", translation: "消化" },
-    { question: "deadly, causing death", answer: "fatal", translation: "致命的な" },
-    { question: "to develop gradually over a long time", answer: "evolve", translation: "進化する" },
-    { question: "to take part in a race or competition", answer: "compete", translation: "競争する" },
-    { question: "to think of a new idea", answer: "come up with", translation: "思いつく" },
-    { question: "when things are not fair for everyone", answer: "inequality", translation: "不平等" },
-    { question: "to find a particular thing or person in a group", answer: "identify", translation: "特定する" },
-    { question: "to allow, make possible", answer: "enable", translation: "可能にする" },
-    { question: "a period when you are made to wait", answer: "delay", translation: "遅延" },
-    { question: "the purpose of an object or device", answer: "function", translation: "機能" },
-    { question: "when an animal no longer exists on Earth", answer: "extinction", translation: "絶滅" },
-    { question: "related to early humans", answer: "primitive", translation: "原始的な" },
-    { question: "a small section of DNA", answer: "gene", translation: "遺伝子" },
-    { question: "to prevent something being damaged", answer: "preserve", translation: "保存する" },
-    { question: "the smallest living part of an animal or plant", answer: "cell", translation: "細胞" },
-    { question: "a type of animal in danger of dying out", answer: "endangered species", translation: "絶滅危惧種" },
-    { question: "the natural environment for an animal or plant", answer: "habitat", translation: "生息地" }
+    { question: "animals kept on a farm like cows or pigs", answer: "livestock", translation: "家畜", qTranslation: "牛や豚のように農場で飼われている動物" },
+    { question: "the using or eating of something", answer: "consumption", translation: "消費", qTranslation: "何かを使用したり食べたりすること" },
+    { question: "the cutting of trees in a forest", answer: "deforestation", translation: "森林破壊", qTranslation: "森の木を切ること" },
+    { question: "sending out gas or heat into the air", answer: "emissions", translation: "排出", qTranslation: "空気中にガスや熱を放出すること" },
+    { question: "completely clean without any bacteria", answer: "sterile", translation: "殺菌された", qTranslation: "細菌が全くなく完全に清潔な" },
+    { question: "very small living things that sometimes cause disease", answer: "bacteria", translation: "細菌", qTranslation: "時に病気を引き起こす非常に小さな生物" },
+    { question: "to make something happen faster", answer: "accelerate", translation: "加速させる", qTranslation: "物事をより速く起こさせること" },
+    { question: "to be likely to cause harm or damage", answer: "threaten", translation: "脅かす", qTranslation: "害や損害を与える可能性があること" },
+    { question: "continuing to live after a dangerous situation", answer: "survival", translation: "生存", qTranslation: "危険な状況の後も生き続けること" },
+    { question: "an object in space used to receive and send signals", answer: "satellite", translation: "衛星", qTranslation: "信号の送受信に使われる宇宙にある物体" },
+    { question: "to sink or go lower", answer: "subside", translation: "沈む", qTranslation: "沈む、または低くなること" },
+    { question: "a rule or law", answer: "regulation", translation: "規則", qTranslation: "規則または法律" },
+    { question: "to take something out", answer: "extract", translation: "抽出する", qTranslation: "何かを取り出すこと" },
+    { question: "to influence, have an effect on", answer: "affect", translation: "影響を与える", qTranslation: "影響を与える、効果を及ぼすこと" },
+    { question: "staying at the same level", answer: "constant", translation: "一定の", qTranslation: "同じレベルに留まること" },
+    { question: "an animal such as a crocodile or snake", answer: "reptile", translation: "爬虫類", qTranslation: "ワニやヘビのような動物" },
+    { question: "all living things within an environment", answer: "ecosystem", translation: "生態系", qTranslation: "環境内のすべての生物" },
+    { question: "an animal that eats only plants", answer: "herbivore", translation: "草食動物", qTranslation: "植物のみを食べる動物" },
+    { question: "the process of breaking down food in the stomach", answer: "digestion", translation: "消化", qTranslation: "胃の中で食物を分解する過程" },
+    { question: "deadly, causing death", answer: "fatal", translation: "致命的な", qTranslation: "致命的な、死を引き起こす" },
+    { question: "to develop gradually over a long time", answer: "evolve", translation: "進化する", qTranslation: "長い時間をかけて徐々に発達すること" },
+    { question: "to take part in a race or competition", answer: "compete", translation: "競争する", qTranslation: "レースや競争に参加すること" },
+    { question: "to think of a new idea", answer: "come up with", translation: "思いつく", qTranslation: "新しいアイデアを思いつくこと" },
+    { question: "when things are not fair for everyone", answer: "inequality", translation: "不平等", qTranslation: "物事が誰にとっても公平ではない時" },
+    { question: "to find a particular thing or person in a group", answer: "identify", translation: "特定する", qTranslation: "集団の中から特定の物や人を見つけること" },
+    { question: "to allow, make possible", answer: "enable", translation: "可能にする", qTranslation: "許可する、可能にする" },
+    { question: "a period when you are made to wait", answer: "delay", translation: "遅延", qTranslation: "待たされる期間" },
+    { question: "the purpose of an object or device", answer: "function", translation: "機能", qTranslation: "物体や装置の目的" },
+    { question: "when an animal no longer exists on Earth", answer: "extinction", translation: "絶滅", qTranslation: "動物が地球上にもう存在しない時" },
+    { question: "related to early humans", answer: "primitive", translation: "原始的な", qTranslation: "初期の人間に関連した" },
+    { question: "a small section of DNA", answer: "gene", translation: "遺伝子", qTranslation: "DNAの小さな部分" },
+    { question: "to prevent something being damaged", answer: "preserve", translation: "保存する", qTranslation: "何かが損傷するのを防ぐこと" },
+    { question: "the smallest living part of an animal or plant", answer: "cell", translation: "細胞", qTranslation: "動物や植物の最小の生きた部分" },
+    { question: "a type of animal in danger of dying out", answer: "endangered species", translation: "絶滅危惧種", qTranslation: "絶滅の危機にある動物の種類" },
+    { question: "the natural environment for an animal or plant", answer: "habitat", translation: "生息地", qTranslation: "動物や植物の自然環境" }
 ];
 
 
@@ -98,6 +99,7 @@ let currentMode = '';
 let currentQuestions = [];
 let userAnswers = []; 
 let globalChoiceMap = []; 
+let feedbackCache = []; // ★追加: 採点結果を保持するキャッシュ
 
 const menuScreen = document.getElementById('menu-screen');
 const quizScreen = document.getElementById('quiz-screen');
@@ -126,7 +128,6 @@ function startMode(mode) {
     menuScreen.classList.add('hidden');
     quizScreen.classList.remove('hidden');
     
-    // ★修正: エラーの原因だった initQ を initQuiz に修正
     initQuiz();
 }
 
@@ -151,26 +152,20 @@ function initQuiz() {
     window.scrollTo(0, 0);
 
     globalChoicePanel.classList.add('hidden');
-    reorderSettings.classList.add('hidden'); // 一旦隠す
-    quizList.classList.remove('quiz-with-translation'); // クラスリセット
+    reorderSettings.classList.add('hidden');
+    quizList.classList.remove('quiz-with-translation');
 
     if (currentMode === 'reorder') {
-        // 並び替えモード
         currentQuestions = shuffle([...reorderData]);
         userAnswers = currentQuestions.map(() => []);
         currentQuestions.forEach(q => {
             q.words = q.correct.split(' ');
             q.shuffledWords = shuffle([...q.words]);
         });
-        
-        // 設定スイッチを表示
         reorderSettings.classList.remove('hidden');
-        
-        // チェックボックスの状態を反映
         if (showTransCheck.checked) {
             quizList.classList.add('quiz-with-translation');
         }
-        
     } 
     else if (currentMode === 'fillin') {
         currentQuestions = shuffle([...fillinData]);
@@ -181,10 +176,12 @@ function initQuiz() {
         setupFooterMode(currentQuestions);
     }
 
+    // ★追加: 採点キャッシュの初期化
+    feedbackCache = currentQuestions.map(() => null);
+
     renderList();
 }
 
-// ★追加: チェックボックスの切り替え監視
 if (showTransCheck) {
     showTransCheck.addEventListener('change', (e) => {
         if (e.target.checked) {
@@ -195,7 +192,6 @@ if (showTransCheck) {
     });
 }
 
-// フッター選択肢のセットアップ
 function setupFooterMode(questionSet) {
     userAnswers = questionSet.map(() => "");
     const allChoices = new Set();
@@ -212,7 +208,6 @@ function setupFooterMode(questionSet) {
     renderFooterChoices();
 }
 
-// フッター描画
 function renderFooterChoices() {
     globalChoiceList.innerHTML = '';
     globalChoiceMap.forEach(item => {
@@ -263,10 +258,7 @@ function renderList() {
         header.textContent = `Q${index + 1}.`;
         card.appendChild(header);
 
-        // --- 並び替え ---
         if (currentMode === 'reorder') {
-            
-            // ★常に和訳要素を作っておく（CSSで表示制御）
             const hintDiv = document.createElement('div');
             hintDiv.className = 'hint-translation';
             hintDiv.textContent = q.translation;
@@ -297,8 +289,6 @@ function renderList() {
             });
             card.appendChild(wordBank);
         } 
-        
-        // --- 穴埋め OR 定義 ---
         else {
             const sentenceDiv = document.createElement('div');
             sentenceDiv.className = 'fillin-sentence';
@@ -327,8 +317,14 @@ function renderList() {
         const feedbackDiv = document.createElement('div');
         feedbackDiv.className = 'feedback-area hidden';
         feedbackDiv.id = `feedback-${index}`;
+        
+        // ★追加: キャッシュに保存された採点結果があれば表示する
+        if (feedbackCache[index]) {
+            feedbackDiv.innerHTML = feedbackCache[index];
+            feedbackDiv.classList.remove('hidden');
+        }
+        
         card.appendChild(feedbackDiv);
-
         quizList.appendChild(card);
     });
 
@@ -341,7 +337,7 @@ function createInput(index) {
     const input = document.createElement('input');
     input.type = 'tel';
     input.className = 'fillin-input';
-    input.placeholder = '#';
+    input.placeholder = "";
     input.value = userAnswers[index] || "";
     input.oninput = (e) => {
         userAnswers[index] = e.target.value;
@@ -395,7 +391,6 @@ function gradeAll() {
         
         if (isCorrect) score++;
 
-        const feedbackDiv = document.getElementById(`feedback-${index}`);
         let correctDisplay = "";
         
         if (currentMode === 'reorder') {
@@ -403,7 +398,8 @@ function gradeAll() {
         } else if (currentMode === 'fillin') {
             correctDisplay = q.question.replace('___', `[ ${q.answer} ]`);
         } else {
-            correctDisplay = `${q.answer} （${q.translation}）`;
+            // ★修正: 定義問題の時、正解単語と「定義文の和訳」も表示する
+            correctDisplay = `${q.answer} （${q.translation}）<br><span style="font-size:0.9rem; color:#555; font-weight:normal;">${q.qTranslation}</span>`;
         }
 
         if (currentMode !== 'reorder') {
@@ -413,14 +409,21 @@ function gradeAll() {
             }
         }
 
-        feedbackDiv.innerHTML = `
+        // ★追加: HTML生成
+        const feedbackHTML = `
             <span class="result-mark ${isCorrect ? 'correct-mark' : 'wrong-mark'}">
                 ${isCorrect ? '〇 正解' : '✕ 不正解'}
             </span>
             ${!isCorrect ? '<br><strong>あなたの回答:</strong> ' + userAnswerDisplay : ''}
             <div class="correct-sentence">正解: ${correctDisplay}</div>
-            ${currentMode === 'reorder' || currentMode === 'fillin' ? `<div class="translation">${q.translation}</div>` : ''}
+            ${(currentMode === 'reorder' || currentMode === 'fillin') ? `<div class="translation">${q.translation}</div>` : ''}
         `;
+
+        // ★追加: 生成したHTMLをキャッシュに保存
+        feedbackCache[index] = feedbackHTML;
+
+        const feedbackDiv = document.getElementById(`feedback-${index}`);
+        feedbackDiv.innerHTML = feedbackHTML;
         feedbackDiv.classList.remove('hidden');
 
         const card = document.getElementById(`q-card-${index}`);

@@ -111,6 +111,76 @@ h1 { color: #2c3e50; }
     margin: 0 5px;
 }
 
+/* --- 設定スイッチのデザイン --- */
+.setting-area {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    display: inline-block;
+    border: 1px solid #eee;
+}
+
+.toggle-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 0.95rem;
+    color: #555;
+    font-weight: bold;
+    justify-content: center;
+}
+
+.toggle-label input { display: none; }
+
+.toggle-switch {
+    position: relative;
+    width: 40px;
+    height: 22px;
+    background-color: #ccc;
+    border-radius: 22px;
+    margin-right: 10px;
+    transition: background-color 0.3s;
+}
+.toggle-switch::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 18px;
+    height: 18px;
+    background-color: white;
+    border-radius: 50%;
+    transition: transform 0.3s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+.toggle-label input:checked + .toggle-switch {
+    background-color: #2ecc71;
+}
+.toggle-label input:checked + .toggle-switch::after {
+    transform: translateX(18px);
+}
+
+/* ヒント表示用のスタイル */
+/* デフォルトでは隠しておく */
+.hint-translation {
+    display: none; 
+    margin-bottom: 10px;
+    padding: 8px;
+    background-color: #eaf2f8;
+    color: #2980b9;
+    border-radius: 5px;
+    font-size: 0.95rem;
+    font-weight: bold;
+    border-left: 4px solid #3498db;
+}
+
+/* JSで親要素にクラスがついたら表示する */
+.quiz-with-translation .hint-translation {
+    display: block;
+}
+
 /* --- 下部固定の選択肢パネル（スマホ対応・コンパクト版） --- */
 .fixed-footer {
     position: fixed;
@@ -120,57 +190,45 @@ h1 { color: #2c3e50; }
     background-color: rgba(255, 255, 255, 0.98);
     box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
     z-index: 1000;
-    
-    /* ★重要: 高さを画面の4分の1までに制限 */
     max-height: 25vh; 
-    
     display: flex;
     flex-direction: column;
     border-top: 1px solid #ccc;
 }
-
 .footer-header {
     background-color: #f1f2f6;
     color: #555;
-    padding: 5px 0;    /* 上下幅を狭く */
+    padding: 5px 0;
     text-align: center;
     font-weight: bold;
-    font-size: 0.8rem; /* 文字サイズ縮小 */
+    font-size: 0.8rem;
     border-bottom: 1px solid #ddd;
 }
-
 .footer-content {
-    padding: 8px;      /* 余白を縮小 */
+    padding: 8px;
     overflow-y: auto;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 6px;          /* 選択肢同士の間隔を詰める */
+    gap: 6px;
 }
-
-/* 選択肢チップ（小さくスリムに） */
 .footer-choice-item {
     background-color: #fff;
     color: #333;
-    
-    /* パディングを詰める */
-    padding: 4px 10px 4px 4px; 
-    
-    border-radius: 4px; /* 丸みを減らしてスペース効率アップ */
-    font-size: 0.85rem; /* 文字サイズ縮小 */
+    padding: 4px 10px 4px 4px;
+    border-radius: 4px;
+    font-size: 0.85rem;
     font-weight: bold;
     border: 1px solid #bbb;
     display: flex;
     align-items: center;
     cursor: default;
 }
-
-/* 番号バッジ（小さく） */
 .footer-choice-num {
     background-color: #3498db;
     color: white;
-    width: 20px;       /* サイズ縮小 */
-    height: 20px;      /* サイズ縮小 */
+    width: 20px;
+    height: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -179,8 +237,6 @@ h1 { color: #2c3e50; }
     font-size: 0.75rem;
     font-weight: bold;
 }
-
-/* 使用済みのスタイル */
 .footer-choice-item.used {
     background-color: #eee;
     color: #ccc;

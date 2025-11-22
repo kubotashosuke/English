@@ -3,27 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>English App</title>
+    <title>English Quiz App</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div class="container">
-        <div style="text-align: left; margin-bottom: 10px;">
-            <a href="../home.html" style="color: #95a5a6; text-decoration: none; font-weight: bold; font-size: 0.9rem;">
-                &larr; ホームに戻る
-            </a>
-        </div>
-        <h1 onclick="location.reload()" style="cursor:pointer;">英語総合1</h1>
+        <h1 onclick="location.reload()" style="cursor:pointer;">English Quiz</h1>
 
         <div id="menu-screen">
             <p>モードを選択してください</p>
             <button onclick="startMode('reorder')" class="btn mode-btn" style="background-color:#3498db;">並び替え問題</button>
-            <button onclick="startMode('fillin')" class="btn mode-btn" style="background-color:#9b59b6;">穴埋め問題</button>
-            <button onclick="startMode('definition')" class="btn mode-btn" style="background-color:#e67e22;">定義問題</button>
+            <button onclick="startMode('fillin')" class="btn mode-btn" style="background-color:#9b59b6;">穴埋め問題 (文脈)</button>
+            <button onclick="startMode('definition')" class="btn mode-btn" style="background-color:#e67e22;">定義問題 (英英辞典)</button>
         </div>
 
         <div id="quiz-screen" class="hidden">
+            
+            <div id="reorder-settings" class="setting-area hidden">
+                <label class="toggle-label">
+                    <input type="checkbox" id="show-trans-check">
+                    <span class="toggle-switch"></span>
+                    <span class="toggle-text">和訳を表示する</span>
+                </label>
+            </div>
             <div id="quiz-list"></div>
 
             <div id="action-area">

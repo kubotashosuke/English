@@ -111,80 +111,83 @@ h1 { color: #2c3e50; }
     margin: 0 5px;
 }
 
-/* フッターパネル */
+/* --- 下部固定の選択肢パネル（スマホ対応・コンパクト版） --- */
 .fixed-footer {
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(5px);
-    box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+    background-color: rgba(255, 255, 255, 0.98);
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
     z-index: 1000;
-    max-height: 40vh;
+    
+    /* ★重要: 高さを画面の4分の1までに制限 */
+    max-height: 25vh; 
+    
     display: flex;
     flex-direction: column;
-    border-top: 1px solid #eaeaea;
+    border-top: 1px solid #ccc;
 }
+
 .footer-header {
-    background-color: #f8f9fa;
-    color: #666;
-    padding: 10px 0;
+    background-color: #f1f2f6;
+    color: #555;
+    padding: 5px 0;    /* 上下幅を狭く */
     text-align: center;
     font-weight: bold;
-    font-size: 0.9rem;
-    border-bottom: 1px solid #eee;
+    font-size: 0.8rem; /* 文字サイズ縮小 */
+    border-bottom: 1px solid #ddd;
 }
+
 .footer-content {
-    padding: 15px 20px;
+    padding: 8px;      /* 余白を縮小 */
     overflow-y: auto;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 12px;
+    gap: 6px;          /* 選択肢同士の間隔を詰める */
 }
+
+/* 選択肢チップ（小さくスリムに） */
 .footer-choice-item {
     background-color: #fff;
     color: #333;
-    padding: 8px 16px 8px 10px;
-    border-radius: 50px;
-    font-size: 1rem;
+    
+    /* パディングを詰める */
+    padding: 4px 10px 4px 4px; 
+    
+    border-radius: 4px; /* 丸みを減らしてスペース効率アップ */
+    font-size: 0.85rem; /* 文字サイズ縮小 */
     font-weight: bold;
-    border: 2px solid #e0e0e0;
+    border: 1px solid #bbb;
     display: flex;
     align-items: center;
-    transition: all 0.2s ease;
     cursor: default;
 }
-.footer-choice-item:hover {
-    border-color: #3498db;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(52, 152, 219, 0.15);
-}
-.footer-choice-item.used {
-    background-color: #f0f0f0;
-    color: #bbb;
-    border-color: #ddd;
-    box-shadow: none;
-    opacity: 0.7;
-}
-.footer-choice-item.used .footer-choice-num {
-    background-color: #bdc3c7;
-    box-shadow: none;
-}
+
+/* 番号バッジ（小さく） */
 .footer-choice-num {
     background-color: #3498db;
     color: white;
-    width: 28px;
-    height: 28px;
+    width: 20px;       /* サイズ縮小 */
+    height: 20px;      /* サイズ縮小 */
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 50%;
-    margin-right: 10px;
-    font-size: 0.9rem;
+    border-radius: 3px;
+    margin-right: 6px;
+    font-size: 0.75rem;
     font-weight: bold;
-    box-shadow: 0 2px 4px rgba(52, 152, 219, 0.3);
+}
+
+/* 使用済みのスタイル */
+.footer-choice-item.used {
+    background-color: #eee;
+    color: #ccc;
+    border-color: #ddd;
+}
+.footer-choice-item.used .footer-choice-num {
+    background-color: #ccc;
 }
 
 /* 結果表示 */

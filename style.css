@@ -1,0 +1,202 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f4f8;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    padding-top: 20px;
+}
+
+.container {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    width: 90%;
+    max-width: 800px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h1 { color: #2c3e50; }
+.hidden { display: none !important; }
+
+/* ボタン共通 */
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin: 10px;
+    transition: opacity 0.3s;
+    color: white;
+}
+.btn:hover { opacity: 0.8; }
+
+.mode-btn { width: 80%; display:block; margin: 15px auto; font-weight: bold;}
+.main-btn { background-color: #2ecc71; width: 100%; font-weight: bold; font-size: 1.2rem; }
+.sub-btn { background-color: #95a5a6; width: 100%; }
+
+/* --- 問題カード --- */
+.question-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 30px;
+    text-align: left;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.question-header {
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #555;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+
+/* 並び替え用 */
+.answer-box {
+    min-height: 50px;
+    background-color: #f9f9f9;
+    border: 2px dashed #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+}
+.word-bank {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dotted #eee;
+}
+.word-chip {
+    background-color: #eec1ea;
+    padding: 6px 12px;
+    border-radius: 15px;
+    cursor: pointer;
+    user-select: none;
+    font-size: 0.95rem;
+    border: 1px solid #dcb0d8;
+}
+.word-chip.selected {
+    background-color: #e0e0e0;
+    color: #aaa;
+    border-color: #ccc;
+    pointer-events: none;
+}
+
+/* 穴埋め・定義用 */
+.fillin-sentence {
+    font-size: 1.1rem;
+    line-height: 2.0;
+    margin-bottom: 15px;
+}
+.fillin-input {
+    width: 50px;
+    padding: 5px;
+    font-size: 1.1rem;
+    text-align: center;
+    border: 2px solid #3498db;
+    border-radius: 5px;
+    margin: 0 5px;
+}
+
+/* フッターパネル */
+.fixed-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+    z-index: 1000;
+    max-height: 40vh;
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid #eaeaea;
+}
+.footer-header {
+    background-color: #f8f9fa;
+    color: #666;
+    padding: 10px 0;
+    text-align: center;
+    font-weight: bold;
+    font-size: 0.9rem;
+    border-bottom: 1px solid #eee;
+}
+.footer-content {
+    padding: 15px 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+}
+.footer-choice-item {
+    background-color: #fff;
+    color: #333;
+    padding: 8px 16px 8px 10px;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: bold;
+    border: 2px solid #e0e0e0;
+    display: flex;
+    align-items: center;
+    transition: all 0.2s ease;
+    cursor: default;
+}
+.footer-choice-item:hover {
+    border-color: #3498db;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(52, 152, 219, 0.15);
+}
+.footer-choice-item.used {
+    background-color: #f0f0f0;
+    color: #bbb;
+    border-color: #ddd;
+    box-shadow: none;
+    opacity: 0.7;
+}
+.footer-choice-item.used .footer-choice-num {
+    background-color: #bdc3c7;
+    box-shadow: none;
+}
+.footer-choice-num {
+    background-color: #3498db;
+    color: white;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin-right: 10px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(52, 152, 219, 0.3);
+}
+
+/* 結果表示 */
+.feedback-area {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    font-size: 0.95rem;
+}
+.result-mark { font-weight: bold; font-size: 1.2rem; margin-right: 10px; }
+.correct-mark { color: #27ae60; }
+.wrong-mark { color: #e74c3c; }
+.correct-sentence { color: #27ae60; font-weight: bold; margin-top: 5px; }
+.translation { color: #555; font-size: 0.9rem; margin-top: 3px; }

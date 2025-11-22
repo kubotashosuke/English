@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Quiz App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1 onclick="location.reload()" style="cursor:pointer;">English Quiz</h1>
+
+        <div id="menu-screen">
+            <p>モードを選択してください</p>
+            <button onclick="startMode('reorder')" class="btn mode-btn" style="background-color:#3498db;">並び替え問題</button>
+            <button onclick="startMode('fillin')" class="btn mode-btn" style="background-color:#9b59b6;">穴埋め問題</button>
+            <button onclick="startMode('definition')" class="btn mode-btn" style="background-color:#e67e22;">定義問題</button>
+        </div>
+
+        <div id="quiz-screen" class="hidden">
+            <div id="quiz-list"></div>
+
+            <div id="action-area">
+                <button onclick="gradeAll()" id="grade-btn" class="btn main-btn">採点する</button>
+                <button onclick="retryQuiz()" id="retry-btn" class="btn sub-btn hidden">もう一度やる</button>
+                <button onclick="goMenu()" class="btn sub-btn" style="margin-top: 10px; background-color:#7f8c8d;">メニューに戻る</button>
+            </div>
+
+            <div id="result-summary" class="hidden">
+                <h2>総合スコア: <span id="total-score">0</span> / <span id="max-score">0</span></h2>
+            </div>
+            
+            <div style="height: 200px;"></div>
+        </div>
+    </div>
+
+    <div id="global-choice-panel" class="fixed-footer hidden">
+        <div class="footer-header">選択肢リスト (番号を入力してください)</div>
+        <div id="global-choice-list" class="footer-content"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

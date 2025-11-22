@@ -4,21 +4,21 @@
 
 // 並び替えデータ
 const reorderData = [
-    { correct: "Although the cells were dead , scientists could still read their DNA .", translation: "細胞は死んでいたが、科学者たちはDNAを読み取ることができた。" },
-    { correct: "Cloning a mammoth might be possible , but should we try to do it ?", translation: "マンモスのクローンを作ることは可能かもしれないが、それをやってみるべきか？" },
-    { correct: "It would be exciting to bring back mammoths , despite the risks of doing so .", translation: "マンモスを復活させるのは、リスクがあるとしてもワクワクする。" },
-    { correct: "Mammals are endotherms , so they can be active regardless of the weather .", translation: "哺乳類は内温動物なので、天候に左右されずに活動することができる。" },
-    { correct: "Large mammals have to eat almost constantly , leading to the generation of heat from digestion .", translation: "大型の哺乳類は、ほぼ絶え間なく食べ続けなければならないので、消化による熱が発生する。" },
-    { correct: "Too much heat is dangerous with the result that mammals cannot grow too large .", translation: "熱を持ちすぎると命にかかわるので、哺乳類はあまり大きくなれない。" },
-    { correct: "We cannot ignore the environment problems which result from our consumption of meat .", translation: "食肉の消費によって引き起こされる環境問題を無視することはできない。" },
-    { correct: "Due to advances in technology , cultured meat has become a reality .", translation: "技術の進歩により、培養肉が現実のものとなってきた。" },
-    { correct: "We must find a solution soon , since deforestation is proceeding so rapidly .", translation: "森林破壊が急速に進んでいるので、早急に解決策を見出さなければならない。" },
-    { correct: "The land under Manila is still sinking , whereas Tokyo has managed to solve the problem .", translation: "マニラの地下は今も沈下しているが、東京は何とか問題を解決している。" },
-    { correct: "In spite of all our efforts , we have not made progress on this issue .", translation: "この問題については、私たちの努力にもかかわらず進展がない。" },
-    { correct: "It will be difficult to solve global warming . However , we must not give up .", translation: "地球温暖化の解決は難しいだろう。しかし、あきらめてはいけない。" },
-    { correct: "If the app functions well , it could help to improve the lives of deaf people .", translation: "このアプリがうまく機能すれば、聴覚障害をもつ人々の生活向上に貢献できるかもしれない。" },
-    { correct: "The invention won't be useful unless it is cheap enough for people to buy it easily .", translation: "この発明は、人々が簡単に買えるほど安くなれば、役に立たない。" },
-    { correct: "As long as we don't hit any new problems , we should be able to release the product next year .", translation: "新たな問題にぶつからない限り、来年には製品を発売できるはずだ。" }
+    { correct: "although the cells were dead , scientists could still read their DNA .", translation: "細胞は死んでいたが、科学者たちはDNAを読み取ることができた。" },
+    { correct: "cloning a mammoth might be possible , but should we try to do it ?", translation: "マンモスのクローンを作ることは可能かもしれないが、それをやってみるべきか？" },
+    { correct: "it would be exciting to bring back mammoths , despite the risks of doing so .", translation: "マンモスを復活させるのは、リスクがあるとしてもワクワクする。" },
+    { correct: "mammals are endotherms , so they can be active regardless of the weather .", translation: "哺乳類は内温動物なので、天候に左右されずに活動することができる。" },
+    { correct: "large mammals have to eat almost constantly , leading to the generation of heat from digestion .", translation: "大型の哺乳類は、ほぼ絶え間なく食べ続けなければならないので、消化による熱が発生する。" },
+    { correct: "too much heat is dangerous with the result that mammals cannot grow too large .", translation: "熱を持ちすぎると命にかかわるので、哺乳類はあまり大きくなれない。" },
+    { correct: "we cannot ignore the environment problems which result from our consumption of meat .", translation: "食肉の消費によって引き起こされる環境問題を無視することはできない。" },
+    { correct: "due to advances in technology , cultured meat has become a reality .", translation: "技術の進歩により、培養肉が現実のものとなってきた。" },
+    { correct: "we must find a solution soon , since deforestation is proceeding so rapidly .", translation: "森林破壊が急速に進んでいるので、早急に解決策を見出さなければならない。" },
+    { correct: "the land under Manila is still sinking , whereas Tokyo has managed to solve the problem .", translation: "マニラの地下は今も沈下しているが、東京は何とか問題を解決している。" },
+    { correct: "in spite of all our efforts , we have not made progress on this issue .", translation: "この問題については、私たちの努力にもかかわらず進展がない。" },
+    { correct: "it will be difficult to solve global warming . however , we must not give up .", translation: "地球温暖化の解決は難しいだろう。しかし、あきらめてはいけない。" },
+    { correct: "if the app functions well , it could help to improve the lives of deaf people .", translation: "このアプリがうまく機能すれば、聴覚障害をもつ人々の生活向上に貢献できるかもしれない。" },
+    { correct: "the invention won't be useful unless it is cheap enough for people to buy it easily .", translation: "この発明は、人々が簡単に買えるほど安くなれば、役に立たない。" },
+    { correct: "as long as we don't hit any new problems , we should be able to release the product next year .", translation: "新たな問題にぶつからない限り、来年には製品を発売できるはずだ。" }
 ];
 
 // 穴埋めデータ (文脈)
@@ -57,13 +57,13 @@ const definitionData = [
     { question: "the cutting of trees in a forest", answer: "deforestation", translation: "森林破壊" },
     { question: "sending out gas or heat into the air", answer: "emissions", translation: "排出" },
     { question: "completely clean without any bacteria", answer: "sterile", translation: "殺菌された" },
-    { question: "very small living things that sometimes cause disease", answer: "bacteria", translation: "バクテリア" },
+    { question: "very small living things that sometimes cause disease", answer: "bacteria", translation: "細菌" },
     { question: "to make something happen faster", answer: "accelerate", translation: "加速させる" },
     { question: "to be likely to cause harm or damage", answer: "threaten", translation: "脅かす" },
     { question: "continuing to live after a dangerous situation", answer: "survival", translation: "生存" },
     { question: "an object in space used to receive and send signals", answer: "satellite", translation: "衛星" },
-    { question: "to sink or go lower", answer: "subside", translation: "低下する・沈む" },
-    { question: "a rule or law", answer: "regulation", translation: "規則・規制" },
+    { question: "to sink or go lower", answer: "subside", translation: "沈む" },
+    { question: "a rule or law", answer: "regulation", translation: "規則" },
     { question: "to take something out", answer: "extract", translation: "抽出する" },
     { question: "to influence, have an effect on", answer: "affect", translation: "影響を与える" },
     { question: "staying at the same level", answer: "constant", translation: "一定の" },

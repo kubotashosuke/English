@@ -4,21 +4,21 @@
 
 // 並び替えデータ
 const reorderData = [
-    { correct: "Although the cells were dead, scientists could still read their DNA.", translation: "細胞は死んでいたが、科学者たちは依然としてそのDNAを読み取ることができた。" },
-    { correct: "Cloning a mammoth might be possible, but should we try to do it?", translation: "マンモスのクローンを作ることは可能かもしれないが、私たちはそうしようとすべきだろうか？" },
-    { correct: "It would be exciting to bring back mammoths, despite the risks of doing so.", translation: "それを行うリスクがあるにもかかわらず、マンモスを蘇らせることは刺激的だろう。" },
-    { correct: "Mammals are endotherms, so they can be active regardless of the weather.", translation: "哺乳類は内温動物なので、天候に関係なく活動できる。" },
-    { correct: "Large mammals have to eat almost constantly, leading to the generation of heat from digestion.", translation: "大型哺乳類はほぼ絶え間なく食べる必要があり、それが消化による熱の発生につながる。" },
-    { correct: "Too much heat is dangerous with the result that mammals cannot grow too large.", translation: "過剰な熱は危険であり、その結果、哺乳類はあまり大きく成長することができない。" },
-    { correct: "We cannot ignore the environment problems which result from our consumption of meat.", translation: "私たちは肉の消費から生じる環境問題を無視することはできない。" },
-    { correct: "Due to advances in technology, cultured meat has become a reality.", translation: "技術の進歩により、培養肉は現実のものとなった。" },
-    { correct: "We must find a solution soon, since deforestation is proceeding so rapidly.", translation: "森林破壊が非常に急速に進んでいるので、私たちはすぐに解決策を見つけなければならない。" },
-    { correct: "The land under Manila is still sinking, whereas Tokyo has managed to solve the problem.", translation: "マニラの土地は依然として沈下しているが、一方で東京はその問題を解決することができた。" },
-    { correct: "In spite of all our efforts, we have not made progress on this issue.", translation: "あらゆる努力にもかかわらず、私たちはこの問題について進展させていない。" },
-    { correct: "It will be difficult to solve global warming. However, we must not give up.", translation: "地球温暖化を解決するのは難しいだろう。しかし、私たちは諦めてはならない。" },
-    { correct: "If the app functions well, it could help to improve the lives of deaf people.", translation: "もしそのアプリがうまく機能すれば、聴覚障害者の生活を向上させるのに役立つかもしれない。" },
-    { correct: "The invention won't be useful unless it is cheap enough for people to buy it easily.", translation: "人々が簡単に買えるほど安くなければ、その発明は役に立たないだろう。" },
-    { correct: "As long as we don't hit any new problems, we should be able to release the product next year.", translation: "新たな問題に直面しない限り、私たちは来年その製品を発売できるはずだ。" }
+    { correct: "Although the cells were dead, scientists could still read their DNA.", translation: "細胞は死んでいたが、科学者たちはDNAを読み取ることができた。" },
+    { correct: "Cloning a mammoth might be possible, but should we try to do it?", translation: "マンモスのクローンを作ることは可能かもしれないが、それをやってみるべきか？" },
+    { correct: "It would be exciting to bring back mammoths, despite the risks of doing so.", translation: "マンモスを復活させるのは、リスクがあるとしてもワクワクする。" },
+    { correct: "Mammals are endotherms, so they can be active regardless of the weather.", translation: "哺乳類は内温動物なので、天候に左右されずに活動することができる。" },
+    { correct: "Large mammals have to eat almost constantly, leading to the generation of heat from digestion.", translation: "大型の哺乳類は、ほぼ絶え間なく食べ続けなければならないので、消化による熱が発生する。" },
+    { correct: "Too much heat is dangerous with the result that mammals cannot grow too large.", translation: "熱を持ちすぎると命にかかわるので、哺乳類はあまり大きくなれない。" },
+    { correct: "We cannot ignore the environment problems which result from our consumption of meat.", translation: "食肉の消費によって引き起こされる環境問題を無視することはできない。" },
+    { correct: "Due to advances in technology, cultured meat has become a reality.", translation: "技術の進歩により、培養肉が現実のものとなってきた。" },
+    { correct: "We must find a solution soon, since deforestation is proceeding so rapidly.", translation: "森林破壊が急速に進んでいるので、早急に解決策を見出さなければならない。" },
+    { correct: "The land under Manila is still sinking, whereas Tokyo has managed to solve the problem.", translation: "マニラの地下は今も沈下しているが、東京は何とか問題を解決している。" },
+    { correct: "In spite of all our efforts, we have not made progress on this issue.", translation: "この問題については、私たちの努力にもかかわらず進展がない。" },
+    { correct: "It will be difficult to solve global warming. However, we must not give up.", translation: "地球温暖化の解決は難しいだろう。しかし、あきらめてはいけない。" },
+    { correct: "If the app functions well, it could help to improve the lives of deaf people.", translation: "このアプリがうまく機能すれば、聴覚障害をもつ人々の生活向上に貢献できるかもしれない。" },
+    { correct: "The invention won't be useful unless it is cheap enough for people to buy it easily.", translation: "この発明は、人々が簡単に買えるほど安くなれば、役に立たない。" },
+    { correct: "As long as we don't hit any new problems, we should be able to release the product next year.", translation: "新たな問題にぶつからない限り、来年には製品を発売できるはずだ。" }
 ];
 
 // 穴埋めデータ (文脈)
@@ -107,6 +107,8 @@ const retryBtn = document.getElementById('retry-btn');
 const resultSummary = document.getElementById('result-summary');
 const globalChoicePanel = document.getElementById('global-choice-panel');
 const globalChoiceList = document.getElementById('global-choice-list');
+const reorderSettings = document.getElementById('reorder-settings');
+const showTransCheck = document.getElementById('show-trans-check');
 
 function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -123,6 +125,8 @@ function startMode(mode) {
     currentMode = mode;
     menuScreen.classList.add('hidden');
     quizScreen.classList.remove('hidden');
+    
+    // ★修正: エラーの原因だった initQ を initQuiz に修正
     initQuiz();
 }
 
@@ -147,14 +151,26 @@ function initQuiz() {
     window.scrollTo(0, 0);
 
     globalChoicePanel.classList.add('hidden');
+    reorderSettings.classList.add('hidden'); // 一旦隠す
+    quizList.classList.remove('quiz-with-translation'); // クラスリセット
 
     if (currentMode === 'reorder') {
+        // 並び替えモード
         currentQuestions = shuffle([...reorderData]);
         userAnswers = currentQuestions.map(() => []);
         currentQuestions.forEach(q => {
             q.words = q.correct.split(' ');
             q.shuffledWords = shuffle([...q.words]);
         });
+        
+        // 設定スイッチを表示
+        reorderSettings.classList.remove('hidden');
+        
+        // チェックボックスの状態を反映
+        if (showTransCheck.checked) {
+            quizList.classList.add('quiz-with-translation');
+        }
+        
     } 
     else if (currentMode === 'fillin') {
         currentQuestions = shuffle([...fillinData]);
@@ -168,16 +184,23 @@ function initQuiz() {
     renderList();
 }
 
-// フッター選択肢のセットアップ（穴埋め・定義共通）
+// ★追加: チェックボックスの切り替え監視
+if (showTransCheck) {
+    showTransCheck.addEventListener('change', (e) => {
+        if (e.target.checked) {
+            quizList.classList.add('quiz-with-translation');
+        } else {
+            quizList.classList.remove('quiz-with-translation');
+        }
+    });
+}
+
+// フッター選択肢のセットアップ
 function setupFooterMode(questionSet) {
     userAnswers = questionSet.map(() => "");
-    
-    // 全問の正解単語を収集
     const allChoices = new Set();
     questionSet.forEach(q => allChoices.add(q.answer));
     
-    // ★変更点: ランダム(shuffle)ではなく、アルファベット順(sort)にする
-    // これにより、毎回固定の順番で表示されます
     const choiceArr = Array.from(allChoices).sort((a, b) => a.localeCompare(b));
     
     globalChoiceMap = choiceArr.map((word, index) => ({
@@ -200,7 +223,6 @@ function renderFooterChoices() {
     });
 }
 
-// フッターの使用状況更新
 function updateFooterUsage() {
     const usedNumbers = new Set();
     userAnswers.forEach(ans => {
@@ -243,6 +265,13 @@ function renderList() {
 
         // --- 並び替え ---
         if (currentMode === 'reorder') {
+            
+            // ★常に和訳要素を作っておく（CSSで表示制御）
+            const hintDiv = document.createElement('div');
+            hintDiv.className = 'hint-translation';
+            hintDiv.textContent = q.translation;
+            card.appendChild(hintDiv);
+
             const answerBox = document.createElement('div');
             answerBox.className = 'answer-box';
             userAnswers[index].forEach((word, wIdx) => {
@@ -269,13 +298,12 @@ function renderList() {
             card.appendChild(wordBank);
         } 
         
-        // --- 穴埋め OR 定義問題 (番号入力スタイル) ---
+        // --- 穴埋め OR 定義 ---
         else {
             const sentenceDiv = document.createElement('div');
             sentenceDiv.className = 'fillin-sentence';
 
             if (currentMode === 'fillin') {
-                // ___ を入力欄に置換
                 const parts = q.question.split('___');
                 if (parts.length === 2) {
                     sentenceDiv.appendChild(document.createTextNode(parts[0]));
@@ -285,7 +313,6 @@ function renderList() {
                     sentenceDiv.textContent = q.question;
                 }
             } else {
-                // 定義問題
                 sentenceDiv.textContent = q.question;
                 const arrow = document.createElement('span');
                 arrow.innerHTML = '<br>➡ ';
@@ -297,7 +324,6 @@ function renderList() {
             card.appendChild(sentenceDiv);
         }
 
-        // 採点結果エリア
         const feedbackDiv = document.createElement('div');
         feedbackDiv.className = 'feedback-area hidden';
         feedbackDiv.id = `feedback-${index}`;
@@ -315,7 +341,7 @@ function createInput(index) {
     const input = document.createElement('input');
     input.type = 'tel';
     input.className = 'fillin-input';
-    input.placeholder = '';
+    input.placeholder = '#';
     input.value = userAnswers[index] || "";
     input.oninput = (e) => {
         userAnswers[index] = e.target.value;
@@ -332,7 +358,6 @@ function createChip(text, onClick) {
     return chip;
 }
 
-// --- 並び替え操作 ---
 function addReorderWord(qIdx, word) {
     userAnswers[qIdx].push(word);
     renderOneCard(qIdx);

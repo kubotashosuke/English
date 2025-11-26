@@ -1,0 +1,218 @@
+body {
+    font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+    background-color: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px 10px;
+    color: #333;
+}
+
+.container {
+    background-color: white;
+    padding: 25px 20px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
+}
+
+/* ヘッダーまわり */
+.header-nav {
+    text-align: left;
+    margin-bottom: 15px;
+}
+.back-link {
+    color: #7f8c8d;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9rem;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+}
+.back-link:hover { background-color: #e0e0e0; }
+
+h1 {
+    color: #2c3e50;
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #eee;
+}
+
+.hidden { display: none !important; }
+
+/* メニュー画面 */
+.description {
+    color: #666;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+/* ボタン共通 */
+.btn {
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: transform 0.2s, opacity 0.2s;
+    color: white;
+    width: 100%;
+    padding: 15px;
+}
+.btn:active { transform: scale(0.98); }
+.btn:hover { opacity: 0.9; }
+
+.mode-btn {
+    background-color: #27ae60;
+    max-width: 300px;
+    margin: 0 auto;
+    font-size: 1.2rem;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(39, 174, 96, 0.3);
+}
+
+.main-btn {
+    background-color: #3498db;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
+}
+
+.sub-btn {
+    background-color: #f39c12;
+    margin-top: 15px;
+}
+
+/* --- 問題カード --- */
+.question-card {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 40px; /* 問題ごとの間隔を広めに */
+    text-align: left;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+
+.question-header {
+    font-weight: bold;
+    color: #7f8c8d;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 8px;
+}
+
+.question-text {
+    font-size: 1.15rem;
+    font-weight: bold;
+    line-height: 1.7;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+/* ★★★ 4択ボタンエリア（グリッドレイアウト） ★★★ */
+.options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* スマホは2列 */
+    gap: 12px; /* ボタン同士の間隔 */
+    margin-bottom: 10px;
+}
+
+/* PCやタブレットなど画面が広い時は4列にする */
+@media (min-width: 600px) {
+    .options-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.option-btn {
+    background-color: #fff;
+    border: 2px solid #dcdcdc;
+    color: #555;
+    padding: 12px 5px; /* 上下12px, 左右5px */
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s;
+    font-weight: bold;
+    
+    /* ボタンの高さ揃えと中央配置 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 54px; 
+    line-height: 1.2;
+}
+
+.option-btn:hover {
+    background-color: #f8f9fa;
+    border-color: #bdc3c7;
+}
+
+/* 選択中のスタイル */
+.option-btn.selected {
+    background-color: #e8f6fd;
+    border-color: #3498db;
+    color: #2980b9;
+}
+
+/* 採点後のスタイル */
+.option-btn.correct {
+    background-color: #d4edda;
+    border-color: #28a745;
+    color: #155724;
+    position: relative;
+}
+.option-btn.wrong {
+    background-color: #f8d7da;
+    border-color: #dc3545;
+    color: #721c24;
+    opacity: 0.7;
+}
+.option-btn.disabled {
+    pointer-events: none; /* クリック不可に */
+}
+
+/* 解説エリア */
+.feedback-area {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border-left: 5px solid #3498db;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+.result-mark {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-right: 10px;
+    display: block;
+    margin-bottom: 5px;
+}
+.correct-mark { color: #27ae60; }
+.wrong-mark { color: #e74c3c; }
+
+.correct-sentence {
+    color: #27ae60;
+    font-weight: bold;
+    margin-top: 8px;
+}
+.translation {
+    color: #555;
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+/* 結果サマリー */
+#result-summary h2 {
+    color: #2c3e50;
+    font-size: 2rem;
+    margin: 30px 0;
+}

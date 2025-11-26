@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grammar Quiz</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="header-nav">
+            <a href="../home.html" class="back-link">
+                &larr; ホームに戻る
+            </a>
+        </div>
+
+        <h1 onclick="location.reload()" style="cursor:pointer;">語彙文法2 後期中間</h1>
+
+        <div id="menu-screen">
+            <button onclick="startQuiz()" class="btn mode-btn">
+                プリント 4択問題
+            </button>
+        </div>
+
+        <div id="quiz-screen" class="hidden">
+            <div id="quiz-list">
+                </div>
+
+            <div id="action-area">
+                <button onclick="gradeAll()" id="grade-btn" class="btn main-btn">採点する</button>
+                <button onclick="retryQuiz()" id="retry-btn" class="btn sub-btn hidden">もう一度やる</button>
+                <button onclick="goMenu()" class="btn sub-btn" style="margin-top: 15px; background-color:#95a5a6;">メニューに戻る</button>
+            </div>
+
+            <div id="result-summary" class="hidden">
+                <h2>スコア: <span id="total-score">0</span> / <span id="max-score">0</span></h2>
+            </div>
+            
+            <div style="height: 100px;"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

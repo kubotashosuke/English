@@ -15,6 +15,7 @@
             padding-top: 50px;
             min-height: 100vh;
             margin: 0;
+            position: relative; /* 戻るボタンの配置用 */
         }
         h1 {
             margin-bottom: 30px;
@@ -23,7 +24,6 @@
         .menu-list {
             display: flex;
             flex-direction: column;
-            /* ↓↓↓ ここを 15px から 25px に広げました */
             gap: 25px; 
             width: 90%;
             max-width: 400px;
@@ -48,16 +48,42 @@
             background-color: #3498db;
             color: #fff;
         }
+
+        /* 戻るボタンのスタイル */
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            text-decoration: none;
+            color: #7f8c8d;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 8px 15px;
+            border-radius: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+        .back-btn:hover {
+            color: #3498db;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+            transform: translateX(-2px);
+        }
     </style>
 </head>
 <body>
 
-    <h1>ホーム</h1>
+    <a href="../home.html" class="back-btn">
+        <span>←</span> Home
+    </a>
+
+    <h1>英語総合1 後期期末</h1>
 
     <div class="menu-list">
-        <a href="sogo/index.html" class="menu-item">英語総合1 後期中間</a>
-        <a href="goibun/index.html" class="menu-item">語彙文法2 後期中間</a>
-        <a href="sogo-kimatu/home.html" class="menu-item">英語総合1 後期期末</a>
+        <a href="teigi/index.html" class="menu-item">定義問題</a>
     </div>
 
 </body>

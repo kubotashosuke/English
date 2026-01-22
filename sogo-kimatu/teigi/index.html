@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Vocabulary Matcher</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1><a href="../home.html" style="text-decoration:none; color:inherit;">英語総合1 後期期末</a></h1>
+    <select id="unitSelect">
+        <option value="6">Unit 6</option>
+        <option value="7">Unit 7</option>
+        <option value="8">Unit 8</option>
+        <option value="9">Unit 9</option>
+        <option value="10">Unit 10</option>
+        <option value="11">Unit 11</option>
+    </select>
+</header>
+
+<div class="container" id="quizContainer">
+    </div>
+
+<div class="container action-area" id="submitArea">
+    <button class="primary-btn" onclick="checkAnswers()">Check Answers</button>
+</div>
+
+<div class="container result-section" id="resultContainer">
+    </div>
+
+<div class="footer-choices">
+    <div class="footer-guide">
+        1. 問題の枠を選択 → 2. 下のリストから単語を選択
+    </div>
+    <div class="choices-grid" id="choicesContainer">
+        </div>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

@@ -126,12 +126,14 @@ let currentUnit = 6;
 let currentDefs = [];
 let activeQuestionIndex = null;
 let userAnswers = {}; // Map definition index -> word ID
+let isChecked = false; // 解答済みフラグ
 
 const unitSelect = document.getElementById('unitSelect');
 const quizContainer = document.getElementById('quizContainer');
 const choicesContainer = document.getElementById('choicesContainer');
-const resultContainer = document.getElementById('resultContainer');
+const scoreSection = document.getElementById('scoreSection');
 const submitArea = document.getElementById('submitArea');
+const footerChoices = document.getElementById('footerChoices');
 
 // Utility: Shuffle array
 function shuffle(array) {
@@ -146,8 +148,11 @@ function loadUnit(unitId) {
     currentUnit = unitId;
     userAnswers = {};
     activeQuestionIndex = null;
-    resultContainer.style.display = 'none';
+    isChecked = false;
+    
+    scoreSection.style.display = 'none';
     submitArea.style.display = 'block';
+    footerChoices.classList.remove('hidden');
 
     // Get data
     const data = quizData[unitId];
@@ -163,8 +168,15 @@ function renderQuestions() {
     quizContainer.innerHTML = '';
     currentDefs.forEach((def, index) => {
         const card = document.createElement('div');
-        card.className = `question-card ${activeQuestionIndex === index ? 'active' : ''}`;
-        card.onclick = (e) => setActiveQuestion(index, e);
+        
+        // 解答前と後でクラスやクリックイベントを変える
+        if (!isChecked) {
+            card.className = `question-card ${activeQuestionIndex === index ? 'active' : ''}`;
+            card.onclick = (e) => setActiveQuestion(index, e);
+        } else {
+            // ここでは仮クラス。checkAnswersで正しいクラスを付け直して再描画する
+            card.className = 'question-card'; 
+        }
 
         const defText = document.createElement('div');
         defText.className = 'def-text';
@@ -193,21 +205,19 @@ function renderChoices(words) {
     words.forEach(word => {
         const btn = document.createElement('div');
         btn.className = 'choice-btn';
-        btn.id = `choice-${word.id}`; // Add ID to find it later
+        btn.id = `choice-${word.id}`; 
         btn.textContent = `${word.id}. ${word.en}`;
-        btn.onclick = () => selectChoice(word.id);
+        if (!isChecked) {
+            btn.onclick = () => selectChoice(word.id);
+        }
         choicesContainer.appendChild(btn);
     });
     updateChoiceVisuals();
 }
 
-// 選択済みの単語を視覚的に薄くする関数
 function updateChoiceVisuals() {
-    // 全てのボタンの used クラスを一度リセット
     const buttons = document.querySelectorAll('.choice-btn');
     buttons.forEach(btn => btn.classList.remove('used'));
-
-    // 使われている回答を取得
     const usedWordIds = Object.values(userAnswers);
 
     usedWordIds.forEach(wordId => {
@@ -219,79 +229,106 @@ function updateChoiceVisuals() {
 }
 
 function setActiveQuestion(index, e) {
+    if (isChecked) return;
     activeQuestionIndex = index;
     renderQuestions();
 }
 
 function selectChoice(wordId) {
+    if (isChecked) return;
+
     if (activeQuestionIndex === null) {
-        // If no question selected, auto-select first unfilled or first
         const firstUnfilled = currentDefs.findIndex((_, i) => !userAnswers[i]);
         activeQuestionIndex = firstUnfilled !== -1 ? firstUnfilled : 0;
     }
     
     userAnswers[activeQuestionIndex] = wordId;
     
-    // Auto advance to next unfilled question
+    // Auto advance
     const nextUnfilled = currentDefs.findIndex((_, i) => !userAnswers[i] && i > activeQuestionIndex);
     if (nextUnfilled !== -1) {
         activeQuestionIndex = nextUnfilled;
     } else {
-        // Try wrapping around
         const firstUnfilled = currentDefs.findIndex((_, i) => !userAnswers[i]);
         activeQuestionIndex = firstUnfilled !== -1 ? firstUnfilled : activeQuestionIndex;
     }
 
     renderQuestions();
-    updateChoiceVisuals(); // 選択後に見た目を更新
+    updateChoiceVisuals();
 }
 
 function checkAnswers() {
+    isChecked = true;
     const total = currentDefs.length;
-    // 「全て答えていないと進めない」制限を削除しました
-
     let correctCount = 0;
-    let mistakesHtml = '';
+
+    // クイズエリアをクリアして、結果カードとして再描画
+    quizContainer.innerHTML = '';
 
     currentDefs.forEach((def, index) => {
         const userWordId = userAnswers[index];
         const isCorrect = userWordId === def.correctId;
+        const correctWordObj = quizData[currentUnit].words.find(w => w.id === def.correctId);
+
+        if (isCorrect) correctCount++;
+
+        // カード作成
+        const card = document.createElement('div');
+        card.className = `question-card ${isCorrect ? 'result-correct' : 'result-wrong'}`;
+
+        // 定義文
+        const defText = document.createElement('div');
+        defText.className = 'def-text';
+        defText.textContent = `Q${index + 1}. ${def.text}`;
+
+        // 解答結果エリア
+        const resultDiv = document.createElement('div');
+        resultDiv.style.marginTop = '10px';
+        resultDiv.style.fontSize = '1rem';
 
         if (isCorrect) {
-            correctCount++;
+            // 正解: 緑色で単語を表示
+            resultDiv.innerHTML = `<span class="ans-correct">✅ ${correctWordObj.en}</span>`;
         } else {
-            const correctWordObj = quizData[currentUnit].words.find(w => w.id === def.correctId);
+            // 不正解: (ユーザーの回答) → 正解
             let userWordText = "No Answer";
-            
             if (userWordId) {
                 const userWordObj = quizData[currentUnit].words.find(w => w.id === userWordId);
                 userWordText = userWordObj.en;
             }
-            
-            mistakesHtml += `
-                <div class="mistake-card">
-                    <div class="mistake-header">Q${index + 1}: ${def.text}</div>
-                    <div class="mistake-detail"><span class="label">定義の意味:</span> ${def.jp}</div>
-                    <div class="mistake-detail"><span class="label">正解:</span> ${correctWordObj.en} (${correctWordObj.jp})</div>
-                    <div class="mistake-detail" style="color:#666; font-size:0.9em; margin-top:5px;">(You chose: ${userWordText})</div>
-                </div>
-            `;
+            resultDiv.innerHTML = `❌ <span class="ans-wrong">${userWordText}</span> → <span class="ans-correct">${correctWordObj.en}</span>`;
         }
+
+        // 日本語訳エリア
+        const transDiv = document.createElement('div');
+        transDiv.className = 'translation-area';
+        transDiv.innerHTML = `
+            <div><span class="label">定義の訳:</span> ${def.jp}</div>
+            <div style="margin-top:4px;"><span class="label">単語:</span> <strong>${correctWordObj.en}</strong> (${correctWordObj.jp})</div>
+        `;
+
+        card.appendChild(defText);
+        card.appendChild(resultDiv);
+        card.appendChild(transDiv);
+        quizContainer.appendChild(card);
     });
 
+    // スコア表示
     const scoreText = `Score: ${correctCount} / ${total}`;
-    
-    resultContainer.innerHTML = `
-        <div class="score-display">${scoreText}</div>
-        ${correctCount === total ? '<div style="text-align:center; color:green; font-weight:bold;">Perfect! All correct.</div>' : '<h3>Review Mistakes:</h3>' + mistakesHtml}
-        <div style="text-align:center; margin-top:30px;">
+    scoreSection.innerHTML = `
+        <div class="final-score">${scoreText}</div>
+        <div>
             <button class="primary-btn" onclick="loadUnit(currentUnit)">Retry Unit</button>
         </div>
     `;
+    scoreSection.style.display = 'block';
 
+    // 提出ボタンエリアとフッターを隠す
     submitArea.style.display = 'none';
-    resultContainer.style.display = 'block';
-    window.scrollTo(0, document.body.scrollHeight);
+    footerChoices.classList.add('hidden');
+
+    // 上部へスクロール
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // Init

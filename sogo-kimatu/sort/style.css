@@ -1,0 +1,209 @@
+:root {
+    --primary-color: #3498db;
+    --accent-color: #f5a623;
+    --bg-color: #f0f4f8;
+    --text-color: #333;
+    --card-bg: #fff;
+    --correct-bg: #e8f5e9;
+    --correct-border: #4caf50;
+    --wrong-bg: #ffebee;
+    --wrong-border: #ef5350;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    padding-bottom: 50px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+header {
+    background-color: #fff;
+    padding: 15px 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h1 { margin: 0; font-size: 1.2rem; color: #2c3e50; }
+
+.back-btn {
+    position: fixed;
+    top: 80px;
+    left: 20px;
+    text-decoration: none;
+    color: #7f8c8d;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 8px 15px;
+    border-radius: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: all 0.2s;
+    font-size: 0.9rem;
+    z-index: 90;
+}
+.back-btn:hover {
+    color: #3498db;
+    transform: translateX(-2px);
+}
+@media (max-width: 850px) {
+    .back-btn { position: static; margin: 10px 0 0 20px; display: inline-flex; }
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* 問題カード */
+.question-card {
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    margin-bottom: 30px; /* カード間の間隔を広めに */
+    border: 2px solid transparent;
+    transition: all 0.2s;
+}
+
+/* 解答後のスタイル */
+.question-card.result-correct {
+    border-color: var(--correct-border);
+    background-color: var(--correct-bg);
+}
+.question-card.result-wrong {
+    border-color: var(--wrong-border);
+    background-color: var(--wrong-bg);
+}
+
+.q-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.jp-text {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #2c3e50;
+    line-height: 1.5;
+}
+
+.prefix-text {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 8px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+/* 解答作成エリア（空欄） */
+.answer-zone {
+    min-height: 50px;
+    background-color: #f8f9fa;
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 15px;
+    transition: background-color 0.2s;
+}
+.answer-zone:empty:before {
+    content: "(ここをクリックして単語を戻せます)";
+    color: #aaa;
+    font-size: 0.85rem;
+}
+
+/* 単語プール（選択肢エリア） */
+.word-pool {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+}
+
+/* 単語タイル */
+.word-tile {
+    background: #fff;
+    border: 1px solid #bdc3c7;
+    padding: 6px 12px;
+    border-radius: 15px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #333;
+    font-size: 0.95rem;
+    box-shadow: 0 2px 2px rgba(0,0,0,0.05);
+    transition: transform 0.1s, background 0.2s;
+    user-select: none;
+    text-transform: lowercase; 
+}
+
+.word-tile:hover {
+    background-color: #ecf0f1;
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+.word-tile:active { transform: scale(0.95); }
+
+/* 解答後の選択肢は触れないように */
+.locked .word-tile {
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+/* アクションエリア */
+.action-area {
+    display: flex;
+    justify-content: center;
+    margin: 30px 0;
+}
+
+button.primary-btn {
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    padding: 15px 50px;
+    font-size: 1.2rem;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+    font-weight: bold;
+    transition: transform 0.1s;
+}
+button.primary-btn:active { transform: scale(0.98); }
+
+/* 結果表示のテキスト */
+.result-feedback {
+    margin-top: 15px;
+    padding: 10px;
+    background: rgba(255,255,255,0.6);
+    border-radius: 5px;
+}
+.ans-correct { color: #2e7d32; font-weight: bold; }
+.ans-wrong { color: #c62828; font-weight: bold; }
+.label { font-weight: normal; font-size: 0.85rem; color: #555; margin-right: 5px; }
+
+/* スコア表示 */
+.final-score {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin: 20px 0;
+    padding: 15px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    display: inline-block;
+}

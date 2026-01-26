@@ -9,7 +9,7 @@
 <body>
 
 <header>
-    <h1><a href="../home.html" style="text-decoration:none; color:inherit;">英語総合1 後期期末</a></h1>
+    <h1><a href="../home.html" style="text-decoration:none; color:inherit;">Vocab Match</a></h1>
     <select id="unitSelect">
         <option value="6">Unit 6</option>
         <option value="7">Unit 7</option>
@@ -20,6 +20,9 @@
     </select>
 </header>
 
+<div class="container" id="scoreSection" style="display:none; text-align:center; margin-bottom:0;">
+    </div>
+
 <div class="container" id="quizContainer">
     </div>
 
@@ -27,13 +30,7 @@
     <button class="primary-btn" onclick="checkAnswers()">Check Answers</button>
 </div>
 
-<div class="container result-section" id="resultContainer">
-    </div>
-
-<div class="footer-choices">
-    <div class="footer-guide">
-        1. 問題の枠を選択 → 2. 下のリストから単語を選択
-    </div>
+<div class="footer-choices" id="footerChoices">
     <div class="choices-grid" id="choicesContainer">
         </div>
 </div>

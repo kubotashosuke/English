@@ -7,7 +7,7 @@ const quizData = [
     
     // Unit 7
     { unit: 7, jp: "このケースは、医師がこれまで見た中で最も難しいものの一つであった。", prefix: "", answer: "this case was one of the hardest the doctor had ever seen" },
-    { unit: 7, jp: "この新しい治療法は、私が今まで受けた中で最も成功した。", prefix: "", answer: "this new treatment was the most successful I've ever received" },
+    { unit: 7, jp: "この新しい治療法は、私が今まで受けた中で最も成功した。", prefix: "", answer: "this new treatment was the most successful i've ever received" },
     { unit: 7, jp: "彼は最も有名な催眠術師である。", prefix: "", answer: "he is the most famous hypnotist of all" },
 
     // Unit 8
@@ -16,7 +16,7 @@ const quizData = [
     { unit: 8, jp: "騒音公害の問題は、私たちの努力にもかかわらず、解決されていない。", prefix: "", answer: "the problem of noise pollution has not been solved despite all of our efforts" },
 
     // Unit 9
-    { unit: 9, jp: "UFOの正体を知るために調査が開始された。", prefix: "", answer: "an investigation was opened in order to understand what UFOs are" },
+    { unit: 9, jp: "UFOの正体を知るために調査が開始された。", prefix: "", answer: "an investigation was opened in order to understand what ufos are" },
     { unit: 9, jp: "チームは、実際に起こったことを確認するために録画を見た。", prefix: "", answer: "the team watched the recording so that they could see what really happened" },
     { unit: 9, jp: "パイロットは、航空機を操縦する能力を高めるために、厳しい訓練を受けた。", prefix: "", answer: "the pilots trained hard so as to increase their ability to fly the aircraft" },
 
@@ -26,7 +26,7 @@ const quizData = [
     { unit: 10, jp: "そのまま実験を継続することにした。", prefix: "", answer: "we decided to continue carrying out the experiment" },
 
     // Unit 11
-    { unit: 11, jp: "アミノ酸は、隕石によって地球にもたらされた可能性が高い。", prefix: "", answer: "it is likely that amino acids were brought to Earth by a meteorite" },
+    { unit: 11, jp: "アミノ酸は、隕石によって地球にもたらされた可能性が高い。", prefix: "", answer: "it is likely that amino acids were brought to earth by a meteorite" },
     { unit: 11, jp: "このサンプルを分析すれば、きっと面白い結果が得られるに違いない。", prefix: "", answer: "the analysis of the sample was sure to bring some interesting results" },
     { unit: 11, jp: "ミッションが成功しない可能性もある。", prefix: "", answer: "there is a possibility that the mission will not succeed" }
 ];
@@ -35,10 +35,12 @@ const quizData = [
 // { pool: ['word', ...], selected: ['word', ...] }
 let questionStates = [];
 let isChecked = false;
+let currentUnit = 6;
 
 const quizContainer = document.getElementById('quizContainer');
 const submitArea = document.getElementById('submitArea');
 const scoreSection = document.getElementById('scoreSection');
+const unitSelect = document.getElementById('unitSelect');
 
 // 配列シャッフル
 function shuffle(array) {
@@ -49,13 +51,32 @@ function shuffle(array) {
     return array;
 }
 
-function init() {
+// ユニット読み込み関数
+function loadUnit(unitId) {
     isChecked = false;
-    // シャッフルしたい場合はここでquizData自体をシャッフルしても良いが、
-    // 順番通りに表示する場合はそのまま使用
-    // 今回は問題順序をランダムにシャッフルする
-    const questions = shuffle(JSON.parse(JSON.stringify(quizData)));
+    currentUnit = unitId;
 
+    // UIリセット
+    scoreSection.style.display = 'none';
+    submitArea.style.display = 'flex';
+    quizContainer.innerHTML = '';
+
+    // データのフィルタリング
+    let targetData = [];
+    if (unitId === 'review') {
+        // 全問（ディープコピー）
+        targetData = JSON.parse(JSON.stringify(quizData));
+    } else {
+        // 指定Unitのみ
+        targetData = quizData.filter(q => q.unit === parseInt(unitId));
+        // ディープコピー
+        targetData = JSON.parse(JSON.stringify(targetData));
+    }
+
+    // 問題の順番をシャッフル
+    const questions = shuffle(targetData);
+
+    // 状態の初期化
     questionStates = questions.map(q => {
         return {
             originalQ: q,
@@ -67,6 +88,7 @@ function init() {
 
     renderAllQuestions();
 }
+
 
 function renderAllQuestions() {
     quizContainer.innerHTML = '';
@@ -144,8 +166,7 @@ function selectWord(qIndex, poolWordIndex) {
     state.pool.splice(poolWordIndex, 1);
     state.selected.push(word);
     
-    // 全体再描画は重いので、特定カードだけ更新するロジックも可能だが、
-    // ここではシンプルに全体再描画（要素数が少ないのでOK）
+    // 特定カードだけ更新するのではなく全体再描画（シンプルさのため）
     renderAllQuestions();
 }
 
@@ -187,7 +208,7 @@ function checkAllAnswers() {
         } else {
             resultDiv.innerHTML = `
                 <div>❌ <span class="label">Your Answer:</span> <span class="ans-wrong" style="text-decoration:none;">${userSentence || "(No Answer)"}</span></div>
-                <div style="margin-top:5px;">✅ <span class="label">Correct:</span> <span class="ans-correct">${correctSentence}</span></div>
+                <div style="margin-top:5px;">✅ <span class="label">Correct:</span> <span class="ans-correct">${state.originalQ.prefix || ""}${correctSentence}</span></div>
             `;
         }
     });
@@ -197,7 +218,7 @@ function checkAllAnswers() {
     scoreSection.innerHTML = `
         <div class="final-score">Score: ${correctCount} / ${total}</div>
         <div>
-            <button class="primary-btn" onclick="location.reload()">Retry All</button>
+            <button class="primary-btn" onclick="loadUnit(currentUnit)">Retry Unit</button>
         </div>
     `;
 
@@ -207,5 +228,10 @@ function checkAllAnswers() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// 開始
-init();
+// イベントリスナー設定
+unitSelect.addEventListener('change', (e) => {
+    loadUnit(e.target.value);
+});
+
+// 初期ロード (Unit 6)
+loadUnit(6);

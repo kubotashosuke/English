@@ -35,6 +35,17 @@ header {
 
 h1 { margin: 0; font-size: 1.2rem; color: #2c3e50; }
 
+/* Unit選択ボックスのスタイル */
+select {
+    padding: 8px 12px;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: 2px solid #ccc;
+    background-color: #fff;
+    color: #333;
+    cursor: pointer;
+}
+
 .back-btn {
     position: fixed;
     top: 80px;
@@ -97,7 +108,7 @@ h1 { margin: 0; font-size: 1.2rem; color: #2c3e50; }
 .question-card.result-correct {
     border: 2px solid var(--correct-border);
     background-color: var(--correct-bg);
-    cursor: default; /* クリック無効っぽく */
+    cursor: default;
 }
 
 .question-card.result-wrong {

@@ -124,6 +124,7 @@ const quizData = {
 
 let currentUnit = 6;
 let currentDefs = [];
+let currentWordList = []; // 現在のUnit(または全復習)で使用する単語リスト
 let activeQuestionIndex = null;
 let userAnswers = {}; // Map definition index -> word ID
 let isChecked = false; // 解答済みフラグ
@@ -144,6 +145,41 @@ function shuffle(array) {
     return array;
 }
 
+// 復習用にデータを結合する関数
+function getReviewData() {
+    let combinedWords = [];
+    let combinedDefs = [];
+    let globalIdCounter = 1;
+
+    // 全Unitのデータをループ
+    Object.keys(quizData).forEach(key => {
+        const unitData = quizData[key];
+        const idMap = {}; // ローカルID -> グローバルIDの変換マップ
+
+        // 単語のIDを振り直して登録
+        unitData.words.forEach(w => {
+            const newId = globalIdCounter++;
+            idMap[w.id] = newId;
+            combinedWords.push({
+                id: newId,
+                en: w.en,
+                jp: w.jp
+            });
+        });
+
+        // 定義の正解IDも新しいIDに変換して登録
+        unitData.defs.forEach(d => {
+            combinedDefs.push({
+                text: d.text,
+                correctId: idMap[d.correctId],
+                jp: d.jp
+            });
+        });
+    });
+
+    return { words: combinedWords, defs: combinedDefs };
+}
+
 function loadUnit(unitId) {
     currentUnit = unitId;
     userAnswers = {};
@@ -154,14 +190,23 @@ function loadUnit(unitId) {
     submitArea.style.display = 'block';
     footerChoices.classList.remove('hidden');
 
-    // Get data
-    const data = quizData[unitId];
-    // Clone definitions to shuffle
-    currentDefs = JSON.parse(JSON.stringify(data.defs));
-    shuffle(currentDefs);
-
-    renderQuestions();
-    renderChoices(data.words);
+    if (unitId === 'review') {
+        // 全復習モード
+        const reviewData = getReviewData();
+        currentWordList = reviewData.words;
+        currentDefs = JSON.parse(JSON.stringify(reviewData.defs));
+        shuffle(currentDefs);
+        renderQuestions();
+        renderChoices(currentWordList);
+    } else {
+        // 通常Unitモード
+        const data = quizData[unitId];
+        currentWordList = data.words;
+        currentDefs = JSON.parse(JSON.stringify(data.defs));
+        shuffle(currentDefs);
+        renderQuestions();
+        renderChoices(currentWordList);
+    }
 }
 
 function renderQuestions() {
@@ -169,12 +214,10 @@ function renderQuestions() {
     currentDefs.forEach((def, index) => {
         const card = document.createElement('div');
         
-        // 解答前と後でクラスやクリックイベントを変える
         if (!isChecked) {
             card.className = `question-card ${activeQuestionIndex === index ? 'active' : ''}`;
             card.onclick = (e) => setActiveQuestion(index, e);
         } else {
-            // ここでは仮クラス。checkAnswersで正しいクラスを付け直して再描画する
             card.className = 'question-card'; 
         }
 
@@ -187,9 +230,12 @@ function renderQuestions() {
         
         const selectedWordId = userAnswers[index];
         if (selectedWordId) {
-            const wordObj = quizData[currentUnit].words.find(w => w.id === selectedWordId);
-            answerBox.textContent = `${wordObj.id}. ${wordObj.en}`;
-            answerBox.classList.add('filled');
+            // 現在の単語リストから検索
+            const wordObj = currentWordList.find(w => w.id === selectedWordId);
+            if (wordObj) {
+                answerBox.textContent = `${wordObj.id}. ${wordObj.en}`;
+                answerBox.classList.add('filled');
+            }
         } else {
             answerBox.textContent = "(Select a word below)";
         }
@@ -244,7 +290,6 @@ function selectChoice(wordId) {
     
     userAnswers[activeQuestionIndex] = wordId;
     
-    // Auto advance
     const nextUnfilled = currentDefs.findIndex((_, i) => !userAnswers[i] && i > activeQuestionIndex);
     if (nextUnfilled !== -1) {
         activeQuestionIndex = nextUnfilled;
@@ -262,44 +307,38 @@ function checkAnswers() {
     const total = currentDefs.length;
     let correctCount = 0;
 
-    // クイズエリアをクリアして、結果カードとして再描画
     quizContainer.innerHTML = '';
 
     currentDefs.forEach((def, index) => {
         const userWordId = userAnswers[index];
         const isCorrect = userWordId === def.correctId;
-        const correctWordObj = quizData[currentUnit].words.find(w => w.id === def.correctId);
+        // 現在の単語リストから正解を取得
+        const correctWordObj = currentWordList.find(w => w.id === def.correctId);
 
         if (isCorrect) correctCount++;
 
-        // カード作成
         const card = document.createElement('div');
         card.className = `question-card ${isCorrect ? 'result-correct' : 'result-wrong'}`;
 
-        // 定義文
         const defText = document.createElement('div');
         defText.className = 'def-text';
         defText.textContent = `Q${index + 1}. ${def.text}`;
 
-        // 解答結果エリア
         const resultDiv = document.createElement('div');
         resultDiv.style.marginTop = '10px';
         resultDiv.style.fontSize = '1rem';
 
         if (isCorrect) {
-            // 正解: 緑色で単語を表示
             resultDiv.innerHTML = `<span class="ans-correct">✅ ${correctWordObj.en}</span>`;
         } else {
-            // 不正解: (ユーザーの回答) → 正解
             let userWordText = "No Answer";
             if (userWordId) {
-                const userWordObj = quizData[currentUnit].words.find(w => w.id === userWordId);
-                userWordText = userWordObj.en;
+                const userWordObj = currentWordList.find(w => w.id === userWordId);
+                if (userWordObj) userWordText = userWordObj.en;
             }
             resultDiv.innerHTML = `❌ <span class="ans-wrong">${userWordText}</span> → <span class="ans-correct">${correctWordObj.en}</span>`;
         }
 
-        // 日本語訳エリア
         const transDiv = document.createElement('div');
         transDiv.className = 'translation-area';
         transDiv.innerHTML = `
@@ -313,7 +352,6 @@ function checkAnswers() {
         quizContainer.appendChild(card);
     });
 
-    // スコア表示
     const scoreText = `Score: ${correctCount} / ${total}`;
     scoreSection.innerHTML = `
         <div class="final-score">${scoreText}</div>
@@ -323,14 +361,16 @@ function checkAnswers() {
     `;
     scoreSection.style.display = 'block';
 
-    // 提出ボタンエリアとフッターを隠す
     submitArea.style.display = 'none';
     footerChoices.classList.add('hidden');
 
-    // 上部へスクロール
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // Init
-unitSelect.addEventListener('change', (e) => loadUnit(parseInt(e.target.value)));
+unitSelect.addEventListener('change', (e) => {
+    const val = e.target.value;
+    // 数値なら変換、'review'ならそのまま
+    loadUnit(val === 'review' ? val : parseInt(val));
+});
 loadUnit(6);

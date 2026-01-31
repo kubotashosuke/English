@@ -7,7 +7,7 @@ const quizData = [
     
     // Unit 7
     { unit: 7, jp: "このケースは、医師がこれまで見た中で最も難しいものの一つであった。", prefix: "", answer: "this case was one of the hardest the doctor had ever seen" },
-    { unit: 7, jp: "この新しい治療法は、私が今まで受けた中で最も成功した。", prefix: "", answer: "this new treatment was the most successful i've ever received" },
+    { unit: 7, jp: "この新しい治療法は、私が今まで受けた中で最も成功した。", prefix: "", answer: "this new treatment was the most successful I've ever received" },
     { unit: 7, jp: "彼は最も有名な催眠術師である。", prefix: "", answer: "he is the most famous hypnotist of all" },
 
     // Unit 8
@@ -16,7 +16,7 @@ const quizData = [
     { unit: 8, jp: "騒音公害の問題は、私たちの努力にもかかわらず、解決されていない。", prefix: "", answer: "the problem of noise pollution has not been solved despite all of our efforts" },
 
     // Unit 9
-    { unit: 9, jp: "UFOの正体を知るために調査が開始された。", prefix: "", answer: "an investigation was opened in order to understand what ufos are" },
+    { unit: 9, jp: "UFOの正体を知るために調査が開始された。", prefix: "", answer: "an investigation was opened in order to understand what UFOs are" },
     { unit: 9, jp: "チームは、実際に起こったことを確認するために録画を見た。", prefix: "", answer: "the team watched the recording so that they could see what really happened" },
     { unit: 9, jp: "パイロットは、航空機を操縦する能力を高めるために、厳しい訓練を受けた。", prefix: "", answer: "the pilots trained hard so as to increase their ability to fly the aircraft" },
 
@@ -26,7 +26,7 @@ const quizData = [
     { unit: 10, jp: "そのまま実験を継続することにした。", prefix: "", answer: "we decided to continue carrying out the experiment" },
 
     // Unit 11
-    { unit: 11, jp: "アミノ酸は、隕石によって地球にもたらされた可能性が高い。", prefix: "", answer: "it is likely that amino acids were brought to earth by a meteorite" },
+    { unit: 11, jp: "アミノ酸は、隕石によって地球にもたらされた可能性が高い。", prefix: "", answer: "it is likely that amino acids were brought to Earth by a meteorite" },
     { unit: 11, jp: "このサンプルを分析すれば、きっと面白い結果が得られるに違いない。", prefix: "", answer: "the analysis of the sample was sure to bring some interesting results" },
     { unit: 11, jp: "ミッションが成功しない可能性もある。", prefix: "", answer: "there is a possibility that the mission will not succeed" }
 ];

@@ -41,6 +41,34 @@ select {
     border: 2px solid #ccc;
     background-color: #fff;
     color: #333;
+    cursor: pointer;
+}
+
+/* 戻るボタンのスタイル */
+.back-btn {
+    position: fixed;
+    top: 80px;
+    left: 20px;
+    text-decoration: none;
+    color: #7f8c8d;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 8px 15px;
+    border-radius: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: all 0.2s;
+    font-size: 0.9rem;
+    z-index: 90;
+}
+.back-btn:hover {
+    color: #3498db;
+    transform: translateX(-2px);
+}
+@media (max-width: 850px) {
+    .back-btn { position: static; margin: 10px 0 0 20px; display: inline-flex; }
 }
 
 .container {

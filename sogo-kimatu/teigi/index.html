@@ -8,35 +8,42 @@
 </head>
 <body>
 
-<header>
-    <h1><a href="../home.html" style="text-decoration:none; color:inherit;">定義</a></h1>
-    <select id="unitSelect">
-        <option value="6">Unit 6</option>
-        <option value="7">Unit 7</option>
-        <option value="8">Unit 8</option>
-        <option value="9">Unit 9</option>
-        <option value="10">Unit 10</option>
-        <option value="11">Unit 11</option>
-        <option value="review" style="font-weight:bold; color:#d35400;">全Unit復習 (Review)</option>
-    </select>
-</header>
+    <a href="../home.html" class="back-btn">
+        <span>←</span> Home
+    </a>
 
-<div class="container" id="scoreSection" style="display:none; text-align:center; margin-bottom:0;">
-    </div>
+    <header>
+        <h1><a href="../home.html" style="text-decoration:none; color:inherit;">定義問題</a></h1>
+        <select id="unitSelect">
+            <option value="6">Unit 6</option>
+            <option value="7">Unit 7</option>
+            <option value="8">Unit 8</option>
+            <option value="9">Unit 9</option>
+            <option value="10">Unit 10</option>
+            <option value="11">Unit 11</option>
+            <option value="review" style="font-weight:bold; color:#d35400;">全Unit復習 (Review)</option>
+        </select>
+    </header>
 
-<div class="container" id="quizContainer">
-    </div>
-
-<div class="container action-area" id="submitArea">
-    <button class="primary-btn" onclick="checkAnswers()">Check Answers</button>
-</div>
-
-<div class="footer-choices" id="footerChoices">
-    <div class="choices-grid" id="choicesContainer">
+    <div class="container" id="scoreSection" style="display:none; text-align:center; margin-bottom:0;">
         </div>
-</div>
 
-<script src="script.js"></script>
+    <div class="container" id="quizContainer">
+        </div>
+
+    <div class="container action-area" id="submitArea">
+        <button class="primary-btn" onclick="checkAnswers()">Check Answers</button>
+    </div>
+
+    <div class="footer-choices" id="footerChoices">
+        <div class="footer-guide">
+            1. 問題の枠を選択 → 2. 下のリストから単語を選択
+        </div>
+        <div class="choices-grid" id="choicesContainer">
+            </div>
+    </div>
+
+    <script src="script.js"></script>
 
 </body>
 </html>

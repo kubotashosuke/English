@@ -81,7 +81,8 @@ function loadUnit(unitId) {
         return {
             originalQ: q,
             // 正解文を単語に分解してシャッフルしてプールに入れる
-            pool: shuffle(q.answer.toLowerCase().split(' ')),
+            // ★変更点: toLowerCase() を削除し、データの大文字小文字をそのまま使用
+            pool: shuffle(q.answer.split(' ')),
             selected: []
         };
     });
@@ -166,7 +167,6 @@ function selectWord(qIndex, poolWordIndex) {
     state.pool.splice(poolWordIndex, 1);
     state.selected.push(word);
     
-    // 特定カードだけ更新するのではなく全体再描画（シンプルさのため）
     renderAllQuestions();
 }
 
@@ -186,14 +186,15 @@ function checkAllAnswers() {
     let correctCount = 0;
     const total = questionStates.length;
 
-    // 再描画して「プール」を消し、「ロック」状態にする
     renderAllQuestions();
 
     questionStates.forEach((state, index) => {
         const card = document.getElementById(`card-${index}`);
         const resultDiv = document.getElementById(`result-${index}`);
         const userSentence = state.selected.join(' ');
-        const correctSentence = state.originalQ.answer.toLowerCase();
+        
+        // ★変更点: toLowerCase() を削除し、そのまま比較
+        const correctSentence = state.originalQ.answer;
 
         const isCorrect = (userSentence === correctSentence);
         if (isCorrect) correctCount++;
@@ -224,7 +225,6 @@ function checkAllAnswers() {
 
     submitArea.style.display = 'none';
     
-    // トップへスクロール
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 

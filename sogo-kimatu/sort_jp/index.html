@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>並び替え問題 (全文)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <a href="../home.html" class="back-btn">
+        <span>←</span> Home
+    </a>
+
+    <header>
+        <h1>並び替え問題 (全文)</h1>
+        <select id="unitSelect">
+            <option value="6">Unit 6</option>
+            <option value="7">Unit 7</option>
+            <option value="8">Unit 8</option>
+            <option value="9">Unit 9</option>
+            <option value="10">Unit 10</option>
+            <option value="11">Unit 11</option>
+            <option value="review" style="font-weight:bold; color:#d35400;">全Unit復習 (Review)</option>
+        </select>
+    </header>
+
+    <div class="container" id="scoreSection" style="display:none; text-align:center;">
+        </div>
+
+    <div class="container" id="quizContainer">
+        </div>
+
+    <div class="container action-area" id="submitArea">
+        <button class="primary-btn" onclick="checkAllAnswers()">Check Answers</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

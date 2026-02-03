@@ -31,8 +31,7 @@ const quizData = [
     { unit: 11, jp: "ミッションが成功しない可能性もある。", prefix: "", answer: "there is a possibility that the mission will not succeed" }
 ];
 
-// 各問題の状態を保持する配列
-// { pool: ['word', ...], selected: ['word', ...] }
+// 状態管理
 let questionStates = [];
 let isChecked = false;
 let currentUnit = 6;
@@ -42,7 +41,7 @@ const submitArea = document.getElementById('submitArea');
 const scoreSection = document.getElementById('scoreSection');
 const unitSelect = document.getElementById('unitSelect');
 
-// 配列シャッフル
+// シャッフル関数
 function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -51,37 +50,28 @@ function shuffle(array) {
     return array;
 }
 
-// ユニット読み込み関数
+// ユニット読み込み
 function loadUnit(unitId) {
     isChecked = false;
     currentUnit = unitId;
 
-    // UIリセット
     scoreSection.style.display = 'none';
     submitArea.style.display = 'flex';
     quizContainer.innerHTML = '';
 
-    // データのフィルタリング
     let targetData = [];
     if (unitId === 'review') {
-        // 全問（ディープコピー）
         targetData = JSON.parse(JSON.stringify(quizData));
     } else {
-        // 指定Unitのみ
         targetData = quizData.filter(q => q.unit === parseInt(unitId));
-        // ディープコピー
         targetData = JSON.parse(JSON.stringify(targetData));
     }
 
-    // 問題の順番をシャッフル
     const questions = shuffle(targetData);
 
-    // 状態の初期化
     questionStates = questions.map(q => {
         return {
             originalQ: q,
-            // 正解文を単語に分解してシャッフルしてプールに入れる
-            // ★変更点: toLowerCase() を削除し、データの大文字小文字をそのまま使用
             pool: shuffle(q.answer.split(' ')),
             selected: []
         };
@@ -90,22 +80,29 @@ function loadUnit(unitId) {
     renderAllQuestions();
 }
 
-
+// 問題描画
 function renderAllQuestions() {
     quizContainer.innerHTML = '';
     
     questionStates.forEach((state, index) => {
         const q = state.originalQ;
         
-        // カード生成
         const card = document.createElement('div');
         card.className = 'question-card';
         card.id = `card-${index}`;
 
-        // 問題文
+        // 問題文（日本語訳の表示制御）
         const jpText = document.createElement('div');
         jpText.className = 'jp-text';
-        jpText.textContent = `Q${index + 1}. ${q.jp}`;
+        
+        // Check Answersボタンを押した後(isChecked === true)だけ表示する
+        if (isChecked) {
+            jpText.textContent = `Q${index + 1}. ${q.jp}`;
+            jpText.style.display = 'block';
+        } else {
+            // 解答中は非表示（Q番号だけ出したい場合はここを調整）
+            jpText.style.display = 'none';
+        }
         card.appendChild(jpText);
 
         // プレフィックス
@@ -128,7 +125,7 @@ function renderAllQuestions() {
         });
         card.appendChild(answerZone);
 
-        // 選択肢エリア (Word Pool)
+        // 選択肢エリア
         if (!isChecked) {
             const poolZone = document.createElement('div');
             poolZone.className = 'word-pool';
@@ -139,7 +136,7 @@ function renderAllQuestions() {
             card.appendChild(poolZone);
         }
 
-        // 結果表示用エリア（初期は空）
+        // 結果フィードバック
         const resultDiv = document.createElement('div');
         resultDiv.className = 'result-feedback';
         resultDiv.style.display = 'none';
@@ -150,7 +147,7 @@ function renderAllQuestions() {
     });
 }
 
-// 単語タイル生成ヘルパー
+// タイル生成
 function createTile(text, onClick) {
     const tile = document.createElement('div');
     tile.className = 'word-tile';
@@ -159,7 +156,7 @@ function createTile(text, onClick) {
     return tile;
 }
 
-// 単語を選択（プール -> 解答）
+// 単語選択
 function selectWord(qIndex, poolWordIndex) {
     const state = questionStates[qIndex];
     const word = state.pool[poolWordIndex];
@@ -170,7 +167,7 @@ function selectWord(qIndex, poolWordIndex) {
     renderAllQuestions();
 }
 
-// 単語を戻す（解答 -> プール）
+// 単語解除
 function deselectWord(qIndex, ansWordIndex) {
     const state = questionStates[qIndex];
     const word = state.selected[ansWordIndex];
@@ -181,11 +178,13 @@ function deselectWord(qIndex, ansWordIndex) {
     renderAllQuestions();
 }
 
+// 答え合わせ
 function checkAllAnswers() {
     isChecked = true;
     let correctCount = 0;
     const total = questionStates.length;
 
+    // ここで renderAllQuestions が呼ばれ、日本語訳が表示されるようになります
     renderAllQuestions();
 
     questionStates.forEach((state, index) => {
@@ -193,16 +192,13 @@ function checkAllAnswers() {
         const resultDiv = document.getElementById(`result-${index}`);
         const userSentence = state.selected.join(' ');
         
-        // ★変更点: toLowerCase() を削除し、そのまま比較
         const correctSentence = state.originalQ.answer;
 
         const isCorrect = (userSentence === correctSentence);
         if (isCorrect) correctCount++;
 
-        // カードの色変更
         card.classList.add(isCorrect ? 'result-correct' : 'result-wrong');
 
-        // 結果メッセージ表示
         resultDiv.style.display = 'block';
         if (isCorrect) {
             resultDiv.innerHTML = `<span class="ans-correct">✅ Correct!</span>`;
@@ -214,7 +210,6 @@ function checkAllAnswers() {
         }
     });
 
-    // スコア表示
     scoreSection.style.display = 'block';
     scoreSection.innerHTML = `
         <div class="final-score">Score: ${correctCount} / ${total}</div>
@@ -228,10 +223,8 @@ function checkAllAnswers() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// イベントリスナー設定
 unitSelect.addEventListener('change', (e) => {
     loadUnit(e.target.value);
 });
 
-// 初期ロード (Unit 6)
 loadUnit(6);

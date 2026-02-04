@@ -22,7 +22,7 @@ const allTests = {
     test4: [
         { id: 421, type: 'scramble', part: 'B', prefix: "We'd like to buy this house. It seems to", suffix: "to live with the children.", words: ["we", "have", "need", "that", "everything"], ans: "have everything that we need", jp: "私たちはこの家を買いたいです。ここには子供たちと暮らすために必要なものがすべて揃っているようです。" },
         { id: 422, type: 'scramble', part: 'B', prefix: "I must know", suffix: ".", words: ["is", "if", "within", "the rent", "my budget"], ans: "if the rent is within my budget", jp: "家賃が私の予算内かどうか知らなければなりません。" },
-        { id: 423, type: 'scramble', part: 'B', prefix: "[", suffix: "] been renovated.", words: ["has", "our", "just", "spacious", "living room"], ans: "Our spacious living room has just", jp: "私たちの広々としたリビングルームは改装されたばかりです。" },
+        { id: 423, type: 'scramble', part: 'B', prefix: "[", suffix: "] been renovated.", words: ["has", "our", "just", "spacious", "living room"], ans: "our spacious living room has just", jp: "私たちの広々としたリビングルームは改装されたばかりです。" },
         { id: 424, type: 'scramble', part: 'B', prefix: "An", suffix: "] when we want to sell something.", words: ["an", "is", "tool", "indispensable", "advertisement"], ans: "advertisement is an indispensable tool", jp: "広告は、物を売りたい時に不可欠なツールです。" },
         { id: 425, type: 'scramble', part: 'B', prefix: "Only", suffix: "] for an interview.", words: ["be", "will", "selected", "contacted", "candidates"], ans: "selected candidates will be contacted", jp: "選ばれた候補者のみ、面接の連絡が行われます。" }
     ]

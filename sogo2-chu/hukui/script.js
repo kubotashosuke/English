@@ -12,11 +12,10 @@ function playAudio(audioSrc) {
     }
 }
 
-// toggleVision (目のアイコンをクリックした時の処理)
+// toggleVision
 const visionIcons = document.querySelectorAll('.toggle-vision');
 visionIcons.forEach(icon => {
     icon.addEventListener('click', (e) => {
-        // クリックしたアイコンの親要素をたどって、対応する英文テキストを取得
         const row = e.currentTarget.closest('.english-row');
         const textElement = row.querySelector('.english-text');
         textElement.classList.toggle('hidden');
@@ -32,19 +31,25 @@ audioIcons.forEach(icon => {
     });
 });
 
-// tooltipToggleForMobile (スマホなど、ホバーが効きにくい環境用の処理)
+// tooltipToggle
 const tooltipWords = document.querySelectorAll('.word-with-tooltip');
 tooltipWords.forEach(word => {
     word.addEventListener('click', (e) => {
+        // クリックイベントが親要素（body等）に伝わってすぐに閉じられるのを防ぐ
         e.stopPropagation();
+        
+        // 既に開いている別の吹き出しをすべて閉じる
         tooltipWords.forEach(w => {
             if (w !== word) w.classList.remove('active');
         });
+        
+        // クリックした単語の吹き出しを表示・非表示切り替え
         word.classList.toggle('active');
     });
 });
 
 // closeTooltipOnBodyClick
+// 画面のどこか別の場所をクリックしたら、すべての吹き出しを閉じる
 document.addEventListener('click', () => {
     tooltipWords.forEach(word => word.classList.remove('active'));
 });

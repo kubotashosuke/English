@@ -103,7 +103,6 @@ body {
     pointer-events: none; 
 }
 
-/* シンプルなアイコンのスタイル */
 .icon {
     display: flex;
     align-items: center;
@@ -122,20 +121,18 @@ body {
     transform: scale(0.9);
 }
 
-/* 絵文字の音声アイコン用 */
 .icon.play-audio {
     font-size: 1.6em;
 }
 
-/* SVGの目のアイコン用 */
 .icon svg {
     width: 24px;
     height: 24px;
     color: #555;
-    pointer-events: none; /* SVG内部のクリックを防ぐ */
+    pointer-events: none; 
 }
 
-/* 吹き出しのスタイル */
+/* 吹き出しのベーススタイル */
 .word-with-tooltip {
     position: relative;
     cursor: pointer;
@@ -144,12 +141,14 @@ body {
     padding: 0 2px;
 }
 
-.word-with-tooltip:hover {
+/* ホバー時とクリック（アクティブ）時に背景色をつける */
+.word-with-tooltip:hover,
+.word-with-tooltip.active {
     background-color: #e0f0ff;
     border-radius: 3px;
 }
 
-.word-with-tooltip:hover::after,
+/* クリック（.active）された時のみ吹き出しを表示する */
 .word-with-tooltip.active::after {
     content: attr(data-translation);
     position: absolute;
@@ -168,7 +167,6 @@ body {
     pointer-events: none;
 }
 
-.word-with-tooltip:hover::before,
 .word-with-tooltip.active::before {
     content: '';
     position: absolute;

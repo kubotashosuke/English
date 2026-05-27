@@ -12,19 +12,39 @@ function playAudio(audioSrc) {
     }
 }
 
-// toggleText
-const englishTexts = document.querySelectorAll('.english-text');
-englishTexts.forEach(text => {
-    text.addEventListener('click', () => {
-        text.classList.toggle('hidden');
+// toggleVision (目のアイコンをクリックした時の処理)
+const visionIcons = document.querySelectorAll('.toggle-vision');
+visionIcons.forEach(icon => {
+    icon.addEventListener('click', (e) => {
+        // クリックしたアイコンの親要素をたどって、対応する英文テキストを取得
+        const row = e.currentTarget.closest('.english-row');
+        const textElement = row.querySelector('.english-text');
+        textElement.classList.toggle('hidden');
     });
 });
 
 // setupAudio
 const audioIcons = document.querySelectorAll('.play-audio');
 audioIcons.forEach(icon => {
-    icon.addEventListener('click', () => {
-        const audioSrc = icon.getAttribute('data-audio');
+    icon.addEventListener('click', (e) => {
+        const audioSrc = e.currentTarget.getAttribute('data-audio');
         playAudio(audioSrc);
     });
+});
+
+// tooltipToggleForMobile (スマホなど、ホバーが効きにくい環境用の処理)
+const tooltipWords = document.querySelectorAll('.word-with-tooltip');
+tooltipWords.forEach(word => {
+    word.addEventListener('click', (e) => {
+        e.stopPropagation();
+        tooltipWords.forEach(w => {
+            if (w !== word) w.classList.remove('active');
+        });
+        word.classList.toggle('active');
+    });
+});
+
+// closeTooltipOnBodyClick
+document.addEventListener('click', () => {
+    tooltipWords.forEach(word => word.classList.remove('active'));
 });

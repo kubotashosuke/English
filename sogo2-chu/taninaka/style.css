@@ -74,40 +74,111 @@ body {
     margin-right: 20px;
 }
 
+.controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
 .label {
     color: #666;
 }
 
 .english-text {
-    cursor: pointer;
     color: #004085;
     font-size: 1.1em;
     padding: 2px 4px;
     border-radius: 4px;
     transition: background-color 0.2s, color 0.2s;
-    user-select: none;
-}
-
-.english-text:hover {
-    background-color: #e0f0ff;
 }
 
 .english-text.hidden {
     color: transparent;
     background-color: #dcdcdc;
+    user-select: none;
 }
 
-.english-text.hidden:hover {
-    background-color: #cccccc;
+.english-text.hidden .word-with-tooltip {
+    border-bottom: none;
+    pointer-events: none; 
 }
 
-.icon.play-audio {
-    font-size: 1.8em;
+/* シンプルなアイコンのスタイル */
+.icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
     user-select: none;
-    transition: transform 0.1s;
+    transition: transform 0.1s, opacity 0.2s;
+    opacity: 0.7;
 }
 
-.icon.play-audio:active {
+.icon:hover {
+    opacity: 1;
+}
+
+.icon:active {
     transform: scale(0.9);
+}
+
+/* 絵文字の音声アイコン用 */
+.icon.play-audio {
+    font-size: 1.6em;
+}
+
+/* SVGの目のアイコン用 */
+.icon svg {
+    width: 24px;
+    height: 24px;
+    color: #555;
+    pointer-events: none; /* SVG内部のクリックを防ぐ */
+}
+
+/* 吹き出しのスタイル */
+.word-with-tooltip {
+    position: relative;
+    cursor: pointer;
+    border-bottom: 2px dotted #3498db;
+    transition: background-color 0.2s;
+    padding: 0 2px;
+}
+
+.word-with-tooltip:hover {
+    background-color: #e0f0ff;
+    border-radius: 3px;
+}
+
+.word-with-tooltip:hover::after,
+.word-with-tooltip.active::after {
+    content: attr(data-translation);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 0.85em;
+    white-space: nowrap;
+    z-index: 10;
+    margin-bottom: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    pointer-events: none;
+}
+
+.word-with-tooltip:hover::before,
+.word-with-tooltip.active::before {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 6px;
+    border-style: solid;
+    border-color: #333 transparent transparent transparent;
+    z-index: 10;
+    margin-bottom: -4px;
+    pointer-events: none;
 }
